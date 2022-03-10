@@ -3,7 +3,7 @@ import { OnGatewayConnection, WebSocketGateway, WebSocketServer } from "@nestjs/
 import { Server } from "socket.io";
 import { TodosService } from "./todos.service";
 
-@WebSocketGateway(3001, { cors: { origin: '*' } })
+@WebSocketGateway({ cors: { origin: '*' } })
 export class TodoGateway implements OnGatewayConnection {
     @WebSocketServer()
     ws: Server;
