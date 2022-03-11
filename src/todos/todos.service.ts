@@ -26,7 +26,9 @@ export class TodosService {
     }
 
     async updateTodo(id: string, todoUpdates: UpdateTodoDto): Promise<TodoWithId> {
-        return this.todosRepository.findOneAndUpdate({ _id: id }, todoUpdates);
+        const updatedTodo = await this.todosRepository.findOneAndUpdate({ _id: id }, todoUpdates);
+        this.todoGateway.ws.emit('updateTodo', updatedTodo);
+        return updatedTodo;
     }
 
     async deleteTodo(id: string) {
